@@ -68,10 +68,10 @@ CREATE TABLE IF NOT EXISTS type (
   name varchar(100) NOT NULL DEFAULT '0',
   description varchar(320) NOT NULL DEFAULT '0',
   value double NOT NULL DEFAULT 0,
-  category_id int unsigned NOT NULL DEFAULT 0,
+  type_id int unsigned NOT NULL DEFAULT 0,
   salesman_id int unsigned NOT NULL DEFAULT 0,
   CONSTRAINT product_PK PRIMARY KEY (id),
-  CONSTRAINT product_category_FK FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT product_type_FK FOREIGN KEY (type_id) REFERENCES type (id) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT product_salesman_FK FOREIGN KEY (salesman_id) REFERENCES salesman (id) ON DELETE NO ACTION ON UPDATE NO ACTION);
  
   
