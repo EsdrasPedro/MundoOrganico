@@ -284,7 +284,7 @@
 
 .modal-mod-min {
     --bs-modal-zindex: 1055;
-    --bs-modal-width: 304px;
+    --bs-modal-width: 300px;
     --bs-modal-padding: 1rem;
     --bs-modal-margin: 0.5rem;
     --bs-modal-color: ;
@@ -313,6 +313,6 @@
 }
 
 .modal-dialog-big {
-    margin-right: 6rem!important;
+    margin-right: 5rem!important;
 
 }
