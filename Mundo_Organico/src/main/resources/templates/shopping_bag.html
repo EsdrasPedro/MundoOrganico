@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> - Mundo Orgânico</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/img/Group 16.png"/>
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" th:href="@{/img/Group 16.png}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="bg-light">
 
-    <header>
-        
-    </header>
+    <header th:replace="fragments/headerInternal :: header_internal"></header>
 
     <div class="row">
         <div class="flex-shrink-0">
-            
+            <nav th:replace="fragments/sidebarSecondary :: sidebar_second"></nav>
         </div>
+
         <main class="flex-nowrap d-flex">
             <div class="col-md-13 ms-sm-auto px-md-2">
                 <div class="pt-1">
@@ -153,5 +152,6 @@
             </div>
         </main> 
     </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -1,39 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar - Mundo Orgânico</title>
-    <link rel="shortcut icon" type="image/png" href="../templates/assets/img/Group 16.png"/>
-    <link rel="stylesheet" href="../templates/assets/css/style.css">
-    <link rel="stylesheet" href="../templates/assets/css/bootstrap.min.css">
+    <link rel="shortcut icon" th:href="@{/img/Group 16.png}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body class="d-flex flex-column h-100 w-100">
 
-    <header>
-       
-    </header>
+    <header th:replace="fragments/headerLogin :: header_login"></header>
 
     <main class="bg-grey">
         <div class="row align-items-center">
 
             <div class="col fundImg">
-                <img src="../templates/assets/img/login.png" alt="" style="width: 862px;">
+                <img th:src="@{/img/login.png}" style="width: 862px;">
             </div>
 
             <div class="col pb-5 ps-5">
                 <h2 class="col-13 text-center fw-semibold">Iniciar sessão</h2>
-                <form method="" action="">
+                <form method="post" th:action="@{/logar}">
                     <div class="g-3">
                         <div class="col-13 pt-5">
                             <label class="form-label hh">Email</label>
-                            <input class="Text" type="email" required>
+                            <input class="Text" type="email" name="email" required>
                         </div>
             
                         <div class="col-13 pt-2">
                             <label class="form-label hh">Senha</label>
-                            <input class="Text" type="password" required>
+                            <input class="Text" type="password" name="password" required>
                         </div>
 
                         <div class="pb-5 hh pt-1">
@@ -50,7 +48,7 @@
 
                         <div class="text-center col-13 pt-3">
                             <p>Não tem conta?
-                                <a href="#" class="fw-semibold link-green" style="text-decoration:none">
+                                <a th:href="@{/cadastro}" class="fw-semibold link-green" style="text-decoration:none">
                                     Inscrever-se
                                 </a>
                             </p>

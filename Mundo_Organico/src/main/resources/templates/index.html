@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundo Orgânico</title>
-    <link rel="shortcut icon" type="image/png" href="../templates/assets/img/Group 16.png"/>
-    <link rel="stylesheet" href="../templates/assets/css/style.css">
-    <link rel="stylesheet" href="../templates/assets/css/bootstrap.min.css">
+    <link rel="shortcut icon" th:href="@{/img/Group 16.png}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-    <header>
-        
-    </header>
+    <header th:replace="fragments/headerHome :: header-home"></header>
     
 </body>
 </html>
