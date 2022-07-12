@@ -1,6 +1,5 @@
 package br.com.mundo_organico.Mundo_Organico.controllers;
 
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.mundo_organico.Mundo_Organico.Exception.UserInvalid;
+import br.com.mundo_organico.Mundo_Organico.Exception.UserNonexistentException;
+import br.com.mundo_organico.Mundo_Organico.Services.UserService;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
 
@@ -20,6 +22,9 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/")
 	public String viewIndex() {
@@ -87,23 +92,32 @@ public class UserController {
 			return "redirect:/cadastro";
 		}
 
-		this.userDAO.save(user);
+		user.setPassword(userService.criptografarPassword(user));
+		userService.save(user);
+		//this.userDAO.save(user);
 		return "index";
 	}
 
 	@PostMapping("/logar")
-	public String logarUser(String email, String password, HttpSession session, RedirectAttributes red) {
+	public String logarUser(Model model, @RequestParam String email, @RequestParam String password, HttpSession session, RedirectAttributes red) {
 
-		User logado = this.userDAO.findByEmailAndPassword(email, password);
+		try {
+			User logado = this.userService.login(email, password);
 
-		if (logado.equals(null)) {
-			// red.addFlashAttribute() mensagem
-			return "redirect:/login";
-
-		} else {
 			session.setAttribute("logado", logado);
+
 			return "redirect:/main-center";
+
 		}
+		catch (UserNonexistentException e) {
+			model.addAttribute("msgErro", e.getMessage());
+		}
+		catch(UserInvalid e) {
+			model.addAttribute("msgErro", e.getMessage());
+		}
+
+		return "/login";
+
 	}
 
 //	@PostMapping("/updateuser-info/{id}")

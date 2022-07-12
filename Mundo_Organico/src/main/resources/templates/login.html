@@ -24,6 +24,9 @@
                 <h2 class="col-13 text-center fw-semibold">Iniciar sessão</h2>
                 <form method="post" th:action="@{/logar}">
                     <div class="g-3">
+                        <div th:if="${!#strings.isEmpty(msgErro)}" class="alert alert-danger">
+                            [[${msgErro}]]
+                        </div>
                         <div class="col-13 pt-5">
                             <label class="form-label hh">Email</label>
                             <input class="Text" type="email" name="email" required>
