@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS Mundo_Orgânico;
-USE Mundo_Orgânico;
+CREATE DATABASE IF NOT EXISTS mundo_organico;
+USE mundo_organico;
 
 CREATE TABLE IF NOT EXISTS user (
   id int unsigned NOT NULL AUTO_INCREMENT,
