@@ -1,4 +1,4 @@
-package com.example.mundo_organico.Mundo_Organico;
+package br.com.mundo_organico.Mundo_Organico;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

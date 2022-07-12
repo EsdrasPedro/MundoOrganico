@@ -1,4 +1,4 @@
-package java.start.projetc.mundo_organico;
+package br.com.mundo_organico.Mundo_Organico;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
