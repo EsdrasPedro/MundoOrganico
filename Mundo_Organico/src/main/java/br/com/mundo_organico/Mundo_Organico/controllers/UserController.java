@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.mundo_organico.Mundo_Organico.Exception.UserInvalid;
-import br.com.mundo_organico.Mundo_Organico.Exception.UserNonexistentException;
-import br.com.mundo_organico.Mundo_Organico.Services.UserService;
+import br.com.mundo_organico.Mundo_Organico.exception.UserInvalid;
+import br.com.mundo_organico.Mundo_Organico.exception.UserNonexistentException;
+import br.com.mundo_organico.Mundo_Organico.services.UserService;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
 
@@ -94,7 +94,6 @@ public class UserController {
 
 		user.setPassword(userService.criptografarPassword(user));
 		userService.save(user);
-		//this.userDAO.save(user);
 		return "index";
 	}
 

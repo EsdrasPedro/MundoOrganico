@@ -1,4 +1,4 @@
-package br.com.mundo_organico.Mundo_Organico.Exception;
+package br.com.mundo_organico.Mundo_Organico.exception;
 
 import java.io.Serial;
 

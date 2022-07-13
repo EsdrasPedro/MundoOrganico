@@ -1,7 +1,7 @@
-package br.com.mundo_organico.Mundo_Organico.Services;
+package br.com.mundo_organico.Mundo_Organico.services;
 
-import br.com.mundo_organico.Mundo_Organico.Exception.UserInvalid;
-import br.com.mundo_organico.Mundo_Organico.Exception.UserNonexistentException;
+import br.com.mundo_organico.Mundo_Organico.exception.UserInvalid;
+import br.com.mundo_organico.Mundo_Organico.exception.UserNonexistentException;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
