@@ -380,3 +380,7 @@
     height: -webkit-fill-available;
     max-height: 10.5h;
 }
+
+.dropdown-toggle::after{
+    content: none;
+}
