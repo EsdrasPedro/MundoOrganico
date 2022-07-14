@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,11 +57,6 @@ public class UserController {
 	@GetMapping("/meus-dados")
 	public String viewDados() {
 		return "settings";
-	}
-
-	@GetMapping("/info-pessoa")
-	public String viewInfo() {
-		return "settings_personal_information";
 	}
 
 	@GetMapping("/credencial")
@@ -118,21 +115,22 @@ public class UserController {
 		return "/login";
 
 	}
+	
+	@GetMapping("/info-pessoa/{id}")
+	public String viewInfo(Model model, @PathVariable Integer id) {
+		User user = userService.findById(id);
+		System.out.println(user);
+		model.addAttribute("user", user);
+		return "settings_personal_information";
+	}
+	
+	@PostMapping("/updateuser-info")
+	public String updateUser(@ModelAttribute User user, Model model) {
+		model.addAttribute("user", user);
+		userService.updateData(user);
 
-//	@PostMapping("/updateuser-info/{id}")
-//	public String updateUserinfo(@PathVariable("id") Integer id, User user, Model model) {
-//		Optional<User> updateUser = this.userDAO.findById(id);
-//      
-//      model.addAttribute("user", updateUser.get());
-//		
-//		return "settings";
-//	}
+		return "redirect:/meus-dados";
 
-//	@PostMapping("/updateuser-credencial/{id}")
-//	public String updateUserCredencial(@PathVariable("id") Integer id, Model model) {
-//		Optional<User> updateUser = this.userDAO.findById(id);
-//	
-//		return "settings";
-//	}
+	}
 
 }

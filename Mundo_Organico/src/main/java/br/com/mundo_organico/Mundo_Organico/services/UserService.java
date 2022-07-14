@@ -55,4 +55,19 @@ public class UserService {
         }
 
     }
+
+    // pesquisar usuário por ID
+    public User findById(Integer id) {
+        Optional<User> obj = userDAO.findById(id);
+        return obj.get();
+    }
+    
+    // atualizar dados do usuário
+    public void updateData(User user) {
+        User entity = findById(user.getId());
+        entity.setName(user.getName());
+        entity.setCpf(user.getCpf());
+        entity.setCellphone(user.getCellphone());
+        userDAO.save(entity);
+    }
 }

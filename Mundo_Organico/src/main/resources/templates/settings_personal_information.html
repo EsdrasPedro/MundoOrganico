@@ -40,16 +40,21 @@
                                 <div class="d-flex align-items-end gy-2">
                                     <div class="mt-4 m-3 col">
                                         <div class="d-flex">
-                                            <form method="post" th:action="@{/updateuser-info}">
+                                            <form method="post" th:action="@{/updateuser-info}" th:object="${user}">
                                                 <div>
+                                                
+                                                    <div>
+                                                        <input type="hidden" th:field="*{id}">
+                                                    </div>
+                                
                                                     <div class="col-12">
                                                         <label class="form-label hh">Nome Completo</label>
-                                                        <input class="Text" type="text" name="name" required>
+                                                        <input class="Text" type="text" th:field="*{name}" name="name" required>
                                                     </div>
 
                                                     <div class="col-12 pt-2">
                                                         <label class="form-label hh">CPF (opcional)</label>
-                                                        <input class="Text" type="text" name="cpf">
+                                                        <input class="Text" type="text" th:field="*{cpf}" name="cpf">
                                                     </div>
 
                                                     <div class="row g-2 pt-2 pb-5 col-12">
@@ -59,7 +64,7 @@
                                                         </div>
                                                         <div class="ps-3 col">
                                                             <label class="form-label hh">Celular</label>
-                                                            <input class="Text" type="text" name="cellphone" required>
+                                                            <input class="Text" type="text" th:field="*{cellphone}" name="celular" required>
                                                         </div>
                                                     </div>
 

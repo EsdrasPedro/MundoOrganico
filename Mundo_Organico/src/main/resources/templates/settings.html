@@ -40,7 +40,7 @@
                                 <div class="d-flex align-items-end gy-2">
                                     <div class="mt-4 col">
                                         <div class="d-flex row col">
-                                            <a th:href="@{/info-pessoa}" style="text-decoration: none; display: flex; color: #000;">
+                                            <a th:href="@{/info-pessoa/{id}(id=${session.logado.id})}" style="text-decoration: none; display: flex; color: #000;">
                                                 <div class="fw-semibold col-sm-11">
                                                     <div>
                                                         Informações pessoais
