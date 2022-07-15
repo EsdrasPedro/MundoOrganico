@@ -53,6 +53,26 @@ public class UserController {
 	public String viewProdCenter() {
 		return "main-center";
 	}
+	
+	@GetMapping("/frutas")
+	public String viewCatFrut() {
+		return "main-fruit";
+	}
+	
+	@GetMapping("/verduras")
+	public String viewCatVeget() {
+		return "main-vegetable";
+	}
+	
+	@GetMapping("/hortalicas")
+	public String viewCatHort() {
+		return "main-vegetable-Hort";
+	}
+	
+	@GetMapping("/temperos")
+	public String viewCatSeas() {
+		return "main-seasonings";
+	}
 
 	@GetMapping("/meus-dados")
 	public String viewDados() {
