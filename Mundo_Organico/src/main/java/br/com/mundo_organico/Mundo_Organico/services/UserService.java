@@ -5,6 +5,9 @@ import br.com.mundo_organico.Mundo_Organico.exception.UserNonexistentException;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,9 @@ public class UserService {
 
     @Autowired
     private UserDAO userDAO;
+    
+    @Autowired
+    private JavaMailSender emailSender;
 
     // vai de 4 à 31 (o padrão do gensalt() é 10)
     private static final int complexidadeSenha = 10;
@@ -26,6 +32,27 @@ public class UserService {
 
     public String criptografarPassword(User user) {
         return BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(complexidadeSenha));
+    }
+    
+    // enviar email após cadastro
+    public void emailSend(User user) {
+
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("ygordevjr@gmail.com");
+            message.setTo(user.getEmail());
+            message.setSubject("Confirmação de cadastro Mundo Orgânico");
+            message.setText("Olá, " + user.getName()
+                    + "! Conta criada com sucesso, esperamos que tenha uma ótima experiência com o nosso site delivery de produtos orgânicos");
+
+            emailSender.send(message);
+
+
+        } catch (MailException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     // verificar o email e senha do usuário para login
@@ -70,4 +97,8 @@ public class UserService {
         entity.setCellphone(user.getCellphone());
         userDAO.save(entity);
     }
+    
+    
+    
+    
 }

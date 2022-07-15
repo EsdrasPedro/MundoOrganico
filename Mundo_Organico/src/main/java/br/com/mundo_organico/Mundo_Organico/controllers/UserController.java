@@ -91,6 +91,7 @@ public class UserController {
 
 		user.setPassword(userService.criptografarPassword(user));
 		userService.save(user);
+		userService.emailSend(user);
 		return "index";
 	}
 
