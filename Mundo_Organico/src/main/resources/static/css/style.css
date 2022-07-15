@@ -18,7 +18,7 @@
 }
 
 .button-w{
-    border-radius: 100px;
+    border-radius: 12px;
     border: none;
     background-color: #FFE563;
     display: flex;
@@ -117,7 +117,7 @@
     display: block;
     background-color: #F3F3F3;
     border-color: #cccccc;
-    border-radius: 16px;
+    border-radius: 12px;
     border-style: solid;
     border-width: 0.26px;
     width: 100%;
