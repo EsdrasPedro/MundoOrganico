@@ -73,6 +73,11 @@ public class UserController {
 	public String viewCatSeas() {
 		return "main-seasonings";
 	}
+	
+	@GetMapping("/compra")
+	public String viewShoppBag() {
+		return "shopping_bag";
+	}
 
 	@GetMapping("/meus-dados")
 	public String viewDados() {
@@ -82,6 +87,14 @@ public class UserController {
 	@GetMapping("/credencial")
 	public String viewCredencial() {
 		return "settings_credentials";
+	}
+	
+	@GetMapping("/info-pessoa/{id}")
+	public String viewInfo(Model model, @PathVariable Integer id) {
+		User user = userService.findById(id);
+		System.out.println(user);
+		model.addAttribute("user", user);
+		return "redirect:/meus-dados";
 	}
 
 	@PostMapping("/salvarUser")
@@ -135,14 +148,6 @@ public class UserController {
 
 		return "/login";
 
-	}
-	
-	@GetMapping("/info-pessoa/{id}")
-	public String viewInfo(Model model, @PathVariable Integer id) {
-		User user = userService.findById(id);
-		System.out.println(user);
-		model.addAttribute("user", user);
-		return "settings_personal_information";
 	}
 	
 	@PostMapping("/updateuser-info")
