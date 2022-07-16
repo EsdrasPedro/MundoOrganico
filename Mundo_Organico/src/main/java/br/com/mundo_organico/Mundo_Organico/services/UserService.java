@@ -16,89 +16,90 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserDAO userDAO;
-    
-    @Autowired
-    private JavaMailSender emailSender;
+	@Autowired
+	private UserDAO userDAO;
 
-    // vai de 4 à 31 (o padrão do gensalt() é 10)
-    private static final int complexidadeSenha = 10;
+	@Autowired
+	private JavaMailSender emailSender;
 
-    // salvar usuário
-    public User save(User user) {
-        return userDAO.saveAndFlush(user);
-    }
+	// vai de 4 à 31 (o padrão do gensalt() é 10)
+	private static final int complexidadeSenha = 10;
 
-    public String criptografarPassword(User user) {
-        return BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(complexidadeSenha));
-    }
-    
-    // enviar email após cadastro
-    public void emailSend(User user) {
+	// salvar usuário
+	public User save(User user) {
+		return userDAO.saveAndFlush(user);
+	}
 
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("ygordevjr@gmail.com");
-            message.setTo(user.getEmail());
-            message.setSubject("Confirmação de cadastro Mundo Orgânico");
-            message.setText("Olá, " + user.getName()
-                    + "! Conta criada com sucesso, esperamos que tenha uma ótima experiência com o nosso site delivery de produtos orgânicos");
+	public String criptografarPassword(User user) {
+		return BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(complexidadeSenha));
+	}
 
-            emailSender.send(message);
+	// enviar email após cadastro
+	public void emailSend(User user) {
 
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("ygordevjr@gmail.com");
+			message.setTo(user.getEmail());
+			message.setSubject("Confirmação de cadastro Mundo Orgânico");
+			message.setText("Olá, " + user.getName()
+					+ "! Conta criada com sucesso, esperamos que tenha uma ótima experiência com o nosso site delivery de produtos orgânicos");
 
-        } catch (MailException e) {
-            e.printStackTrace();
-        }
+			emailSender.send(message);
 
+		} catch (MailException e) {
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    // verificar o email e senha do usuário para login
-    public User login(String email, String password) throws UserNonexistentException, UserInvalid {
-    	
-    	if(email.isBlank()) {
-    		throw new UserInvalid("Insira o email.");
-    	}
-    	
-    	if(password.isBlank()) {
-    		throw new UserInvalid("Insira a senha.");
-    	}
+	// verificar o email e senha do usuário para login
+	public User login(String email, String password) throws UserNonexistentException, UserInvalid {
 
-        Optional<User> user = userDAO.findByEmail(email);
+		if (email.isBlank()) {
+			throw new UserInvalid("Insira o email.");
+		}
 
-        if(user.isPresent()) {
-            // Se a senha estiver correta
-            if (BCrypt.checkpw(password, user.get().getPassword())) {
-                return user.get();
-            }
-            else {
-                throw new UserNonexistentException("Email e/ou senha inválidos");
-            }
-        }
-        else {
-            throw new UserNonexistentException("Email e/ou senha inválidos");
-        }
+		if (password.isBlank()) {
+			throw new UserInvalid("Insira a senha.");
+		}
 
-    }
+		Optional<User> user = userDAO.findByEmail(email);
 
-    // pesquisar usuário por ID
-    public User findById(Integer id) {
-        Optional<User> obj = userDAO.findById(id);
-        return obj.get();
-    }
-    
-    // atualizar dados do usuário
-    public void updateData(User user) {
-        User entity = findById(user.getId());
-        entity.setName(user.getName());
-        entity.setCpf(user.getCpf());
-        entity.setCellphone(user.getCellphone());
-        userDAO.save(entity);
-    }
-    
-    
-    
-    
+		if (user.isPresent()) {
+			// Se a senha estiver correta
+			if (BCrypt.checkpw(password, user.get().getPassword())) {
+				return user.get();
+			} else {
+				throw new UserNonexistentException("Email e/ou senha inválidos");
+			}
+		} else {
+			throw new UserNonexistentException("Email e/ou senha inválidos");
+		}
+
+	}
+
+	// pesquisar usuário por ID
+	public User findById(Integer id) {
+		Optional<User> obj = userDAO.findById(id);
+		return obj.get();
+	}
+
+	// atualizar dados do usuário
+	public void updateData(User user) {
+		User entity = findById(user.getId());
+		entity.setName(user.getName());
+		entity.setCpf(user.getCpf());
+		entity.setCellphone(user.getCellphone());
+		userDAO.save(entity);
+	}
+
+	// atualizar dados do usuário
+	public void updateDataC(User user) {
+		User entity = findById(user.getId());
+		entity.setEmail(user.getEmail());
+		entity.setPassword(user.getPassword());
+		userDAO.save(entity);
+	}
+
 }

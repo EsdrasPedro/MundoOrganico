@@ -1,6 +1,5 @@
 package br.com.mundo_organico.Mundo_Organico.controllers;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -53,27 +52,27 @@ public class UserController {
 	public String viewProdCenter() {
 		return "main-center";
 	}
-	
+
 	@GetMapping("/frutas")
 	public String viewCatFrut() {
 		return "main-fruit";
 	}
-	
+
 	@GetMapping("/verduras")
 	public String viewCatVeget() {
 		return "main-vegetable";
 	}
-	
+
 	@GetMapping("/hortalicas")
 	public String viewCatHort() {
 		return "main-vegetable-Hort";
 	}
-	
+
 	@GetMapping("/temperos")
 	public String viewCatSeas() {
 		return "main-seasonings";
 	}
-	
+
 	@GetMapping("/compra")
 	public String viewShoppBag() {
 		return "shopping_bag";
@@ -88,13 +87,21 @@ public class UserController {
 	public String viewCredencial() {
 		return "settings_credentials";
 	}
-	
+
 	@GetMapping("/info-pessoa/{id}")
 	public String viewInfo(Model model, @PathVariable Integer id) {
 		User user = userService.findById(id);
 		System.out.println(user);
 		model.addAttribute("user", user);
-		return "redirect:/meus-dados";
+		return "settings_personal_information";
+	}
+
+	@GetMapping("/credencial/{id}")
+	public String viewCred(Model model, @PathVariable Integer id) {
+		User user = userService.findById(id);
+		System.out.println(user);
+		model.addAttribute("user", user);
+		return "settings_credentials";
 	}
 
 	@PostMapping("/salvarUser")
@@ -129,7 +136,8 @@ public class UserController {
 	}
 
 	@PostMapping("/logar")
-	public String logarUser(Model model, @RequestParam String email, @RequestParam String password, HttpSession session, RedirectAttributes red) {
+	public String logarUser(Model model, @RequestParam String email, @RequestParam String password, HttpSession session,
+			RedirectAttributes red) {
 
 		try {
 			User logado = this.userService.login(email, password);
@@ -138,25 +146,47 @@ public class UserController {
 
 			return "redirect:/main-center";
 
-		}
-		catch (UserNonexistentException e) {
+		} catch (UserNonexistentException e) {
 			model.addAttribute("msgErro", e.getMessage());
-		}
-		catch(UserInvalid e) {
+		} catch (UserInvalid e) {
 			model.addAttribute("msgErro", e.getMessage());
 		}
 
 		return "/login";
 
 	}
-	
+
 	@PostMapping("/updateuser-info")
 	public String updateUser(@ModelAttribute User user, Model model) {
 		model.addAttribute("user", user);
 		userService.updateData(user);
 
 		return "redirect:/meus-dados";
+	}
 
+	@PostMapping("/updateuser-credencial")
+	public String updateUserC(@ModelAttribute User user, String passwordValid, Model model) {
+
+		if (this.userDAO.existsByEmail(user.getEmail()) && !user.getPassword().equals(passwordValid)) {
+			// red.addFlashAttribute(); mensagem
+			// red.addFlashAttribute("", user); Retornar o resto
+			//return "redirect:/credencial/{id}";
+
+		} else if (this.userDAO.existsByEmail(user.getEmail())) {
+			// red.addFlashAttribute(); mensagem
+			// red.addFlashAttribute("", user); Retornar o resto
+			//return "redirect:/credencial/{id}";
+
+		} else if (!user.getPassword().equals(passwordValid)) {
+			// red.addFlashAttribute(); mensagem
+			// red.addFlashAttribute("", user); Retornar o resto
+			//return "redirect:/credencial/{id}";
+		}
+
+		model.addAttribute("user", user);
+		userService.updateDataC(user);
+
+		return "redirect:/meus-dados";
 	}
 
 }
