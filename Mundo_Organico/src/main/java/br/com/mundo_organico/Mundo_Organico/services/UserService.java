@@ -98,7 +98,7 @@ public class UserService {
 	public void updateDataC(User user) {
 		User entity = findById(user.getId());
 		entity.setEmail(user.getEmail());
-		entity.setPassword(user.getPassword());
+		entity.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(complexidadeSenha)));
 		userDAO.save(entity);
 	}
 
