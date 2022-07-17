@@ -170,17 +170,17 @@ public class UserController {
 		if (this.userDAO.existsByEmail(user.getEmail()) && !user.getPassword().equals(passwordValid)) {
 			// red.addFlashAttribute(); mensagem
 			// red.addFlashAttribute("", user); Retornar o resto
-			//return "redirect:/credencial/{id}";
+			return "redirect:/credencial/{id}";
 
 		} else if (this.userDAO.existsByEmail(user.getEmail())) {
 			// red.addFlashAttribute(); mensagem
 			// red.addFlashAttribute("", user); Retornar o resto
-			//return "redirect:/credencial/{id}";
+			return "redirect:/credencial/{id}";
 
 		} else if (!user.getPassword().equals(passwordValid)) {
 			// red.addFlashAttribute(); mensagem
 			// red.addFlashAttribute("", user); Retornar o resto
-			//return "redirect:/credencial/{id}";
+			return "redirect:/credencial/{id}";
 		}
 
 		model.addAttribute("user", user);
