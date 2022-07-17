@@ -62,7 +62,7 @@
                                 <div class="d-flex align-items-end">
                                     <div class="mt-4 col">
                                         <div class="d-flex row col">
-                                            <a th:href="@{/credencial}" style="text-decoration: none; display: flex; color: #000;">
+                                            <a th:href="@{/credencial/{id}(id=${session.logado.id})}" style="text-decoration: none; display: flex; color: #000;">
                                                 <div class="fw-semibold col-sm-11">
                                                     <div>
                                                         Credenciais
