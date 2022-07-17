@@ -83,11 +83,6 @@ public class UserController {
 		return "settings";
 	}
 
-	@GetMapping("/credencial")
-	public String viewCredencial() {
-		return "settings_credentials";
-	}
-
 	@GetMapping("/info-pessoa/{id}")
 	public String viewInfo(Model model, @PathVariable Integer id) {
 		User user = userService.findById(id);
