@@ -77,6 +77,11 @@ public class UserController {
 	public String viewShoppBag() {
 		return "shopping_bag";
 	}
+	
+	@GetMapping("/pedidos")
+	public String viewHistor() {
+		return "historic";
+	}
 
 	@GetMapping("/meus-dados")
 	public String viewDados() {
