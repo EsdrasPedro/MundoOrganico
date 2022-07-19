@@ -39,7 +39,7 @@ public class UserService {
 
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setFrom("ygordevjr@gmail.com");
+			message.setFrom("mundorganicoc@gmail.com");
 			message.setTo(user.getEmail());
 			message.setSubject("Confirmação de cadastro Mundo Orgânico");
 			message.setText("Olá, " + user.getName()
