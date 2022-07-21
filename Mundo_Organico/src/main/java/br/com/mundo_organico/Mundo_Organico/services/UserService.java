@@ -42,8 +42,10 @@ public class UserService {
 			message.setFrom("mundorganicoc@gmail.com");
 			message.setTo(user.getEmail());
 			message.setSubject("Confirmação de cadastro Mundo Orgânico");
-			message.setText("Olá, " + user.getName()
-					+ "! Conta criada com sucesso, esperamos que tenha uma ótima experiência com o nosso site delivery de produtos orgânicos");
+			message.setText("Olá, " + user.getName() + "."
+					+ "\n Parabéns! Sua conta foi confirmada e sua sacolinha está pronta para ser usada. "
+					+ "Temos diversos produtos e esperamos que você aproveite tudo o que temos a oferecer."
+					+ "\n\n Equipe Mundo Orgânico.");
 
 			emailSender.send(message);
 
