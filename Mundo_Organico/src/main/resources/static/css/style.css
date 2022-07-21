@@ -407,6 +407,7 @@
 .col-md-01 {
     flex: 0 0 auto;
     width: 11%;
+    max-width: 152px;
 }
 
 .card-product{
