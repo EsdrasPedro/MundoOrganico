@@ -1,5 +1,7 @@
 package br.com.mundo_organico.Mundo_Organico.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mundo_organico.Mundo_Organico.exception.UserInvalid;
 import br.com.mundo_organico.Mundo_Organico.exception.UserNonexistentException;
+import br.com.mundo_organico.Mundo_Organico.services.ProductService;
 import br.com.mundo_organico.Mundo_Organico.services.UserService;
+import br.com.mundo_organico.Mundo_Organico.models.Product;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
 
@@ -26,6 +30,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ProductService productService;
 
 	@GetMapping("/")
 	public String viewIndex() {
@@ -54,7 +61,12 @@ public class UserController {
 	}
 
 	@GetMapping("/main-center")
-	public String viewProdCenter() {
+	public String viewProdCenter(Model model) {
+		
+		List<Product> list = productService.listProducts();
+
+		model.addAttribute("products", list);
+		
 		return "main-center";
 	}
 

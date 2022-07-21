@@ -37,6 +37,14 @@ public class Salesman {
 	public Salesman() {
 		super();
 	}
+	
+	public Salesman(Integer id, String fantasy_name, String cnpj, String email, String password) {
+		this.id = id;
+		this.fantasy_name = fantasy_name;
+		this.cnpj = cnpj;
+		this.email = email;
+		this.password = password;
+	}
 
 	public Integer getId() {
 		return id;

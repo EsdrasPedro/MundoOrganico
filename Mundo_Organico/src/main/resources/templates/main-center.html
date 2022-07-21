@@ -61,23 +61,20 @@
                 <div class="px-4 pt-4">
                     <div class="d-flex">
 
-                        <div class="col-md-01 bg-white card-product me-4">
+                        <div class="col-md-01 bg-white card-product me-4" th:each="prod : ${products}">
                             <div>
                                 <div>
-                                    <img src="" alt="" width="100%" height="128" class="border-img">
+                                    <img th:src="@{(${prod.src})}" alt="" width="100%" height="128" class="border-img">
                                 </div>
                                 <div class="card-product-body">
-                                    <div class="fw-semibold pt-1">
-                                            <small class="lh-sm">
-                                                Fruta 1
-                                            </small>
+                                     <div class="fw-semibold pt-1">
+                                        <span th:text="${prod.name}">
+                                        </span>
                                         <div class="row pt-2">
                                             <small class="h-small fw-normal lh-sm">
                                                 Menor preço
                                             </small>
-                                            <small>
-                                                R$ 0,00
-                                            </small>
+                                            <span th:text="${prod.value}"></span>
                                         </div>
                                     </div>
                                 </div>

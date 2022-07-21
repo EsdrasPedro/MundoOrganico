@@ -30,11 +30,17 @@ public class Product {
 
 	@Column(nullable = false)
 	private Double value;
+	
+	@Column(nullable = false)
+	private String type;
+	
+	@Column(nullable = false)
+	private String src;
 
 	@OneToOne
-	@JoinColumn(name = "type_id")
-	private Type type;
-
+	@JoinColumn(name = "category_id")
+	private Category category;
+	
 	@ManyToOne
 	@JoinColumn(name = "salesman_id")
 	private Salesman salesman;
@@ -44,6 +50,17 @@ public class Product {
 
 	public Product() {
 		super();
+	}
+	
+	public Product(Integer id, String name, String description, Double value, String type, Category category, Salesman salesman, String src) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.value = value;
+		this.type = type;
+		this.category = category;
+		this.salesman = salesman;
+		this.src = src;
 	}
 
 	public Integer getId() {
@@ -77,13 +94,21 @@ public class Product {
 	public void setValue(Double value) {
 		this.value = value;
 	}
-
-	public Type getType() {
+	
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
 	}
 
 	public Salesman getSalesman() {
@@ -93,7 +118,7 @@ public class Product {
 	public void setSalesman(Salesman salesman) {
 		this.salesman = salesman;
 	}
-
+	
 	public Set<Ordered_Items> getItems() {
 		return items;
 	}

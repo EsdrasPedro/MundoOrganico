@@ -21,12 +21,18 @@ public class Category {
 
 	@Column(nullable = false)
 	private String name;
-
+	
 	@OneToMany(mappedBy = "category")
-	private Set<Type> type = new HashSet<>();
+	public Set<Product> products = new HashSet<>();
 
 	public Category() {
 		super();
+	}
+	
+	public Category(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -45,12 +51,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public Set<Type> getType() {
-		return type;
+	public Set<Product> getProducts() {
+		return products;
 	}
 
-	public void setType(Set<Type> type) {
-		this.type = type;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 }
