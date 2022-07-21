@@ -36,6 +36,11 @@ public class UserController {
 	public String viewUsuario() {
 		return "register";
 	}
+	
+	@GetMapping("/esqueceu-senha")
+	public String viewPassword() {
+		return "password1";
+	}
 
 	@GetMapping("/login")
 	public String viewLogin() {
