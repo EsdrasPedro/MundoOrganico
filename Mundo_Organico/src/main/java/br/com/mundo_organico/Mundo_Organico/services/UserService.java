@@ -4,6 +4,8 @@ import br.com.mundo_organico.Mundo_Organico.exception.UserInvalid;
 import br.com.mundo_organico.Mundo_Organico.exception.UserNonexistentException;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,6 +23,9 @@ public class UserService {
 
 	@Autowired
 	private JavaMailSender emailSender;
+
+	@Autowired
+	private EmailService emailService;
 
 	// vai de 4 à 31 (o padrão do gensalt() é 10)
 	private static final int complexidadeSenha = 10;
@@ -86,6 +91,15 @@ public class UserService {
 		Optional<User> obj = userDAO.findById(id);
 		return obj.get();
 	}
+	
+    public User searchByEmail(String email) {
+        return userDAO.findByEmail1(email);
+    }
+
+    // pesquisar do usuario por código de verificação
+    public User searchByCod(String cod) {
+        return userDAO.findByCod(cod);
+    }
 
 	// atualizar dados do usuário
 	public void updateData(User user) {
@@ -96,12 +110,31 @@ public class UserService {
 		userDAO.save(entity);
 	}
 
+	// alterar senha do usuário
+	public void alterPassword(User user, String password) {
+		user.setCodVerificar(null);
+		user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(complexidadeSenha)));
+		userDAO.save(user);
+	}
+
 	// atualizar dados do usuário
 	public void updateDataC(User user) {
 		User entity = findById(user.getId());
 		entity.setEmail(user.getEmail());
 		entity.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(complexidadeSenha)));
 		userDAO.save(entity);
+	}
+
+	public void requestAlterPassword(String email) {
+		User user = userDAO.findByEmail1(email);
+
+		String verificador = RandomStringUtils.randomAlphanumeric(6);
+		user.setCodVerificar(verificador);
+
+		userDAO.save(user);
+
+		emailService.sendRequestAlterPassword(email, verificador);
+
 	}
 
 }

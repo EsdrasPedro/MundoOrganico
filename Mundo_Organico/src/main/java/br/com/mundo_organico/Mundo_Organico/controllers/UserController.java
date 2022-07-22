@@ -49,6 +49,34 @@ public class UserController {
 		return "password1";
 	}
 
+	@PostMapping("/redefinir-senha")
+	public String viewPassword1(Model model, String email) {
+		userService.requestAlterPassword(email);
+		return "redirect:/alterar-senha";
+	}
+
+	@GetMapping("/alterar-senha")
+	public String viewAlterPassword() {
+		return "password2";
+	}
+
+	@PostMapping("/nova-senha")
+		public String viewAlterPassword(User user, String passwordValid, Model model)  {
+
+		User u = userService.searchByCod(user.getCodVerificar());
+
+		// comparar se o código digitado pelo usuário é igual ao que estar no banco de dados
+		if (!user.getCodVerificar().equals(u.getCodVerificar())) {
+			return "redirect:/esqueceu-senha";
+		}
+
+		//user.setCodVerificar(null);
+		userService.alterPassword(u, user.getPassword());
+
+		return "redirect:/login";
+
+	}
+
 	@GetMapping("/login")
 	public String viewLogin() {
 		return "login";
