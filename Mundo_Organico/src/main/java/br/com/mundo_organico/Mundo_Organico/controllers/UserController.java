@@ -30,7 +30,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -43,16 +43,24 @@ public class UserController {
 	public String viewUsuario() {
 		return "register";
 	}
-	
+
 	@GetMapping("/esqueceu-senha")
 	public String viewPassword() {
 		return "password1";
 	}
 
 	@PostMapping("/redefinir-senha")
-	public String viewPassword1(Model model, String email) {
-		userService.requestAlterPassword(email);
-		return "redirect:/alterar-senha";
+	public String viewPassword1(RedirectAttributes ra, String email) {
+
+		try {
+			userService.requestAlterPassword(email);
+			return "redirect:/alterar-senha";
+		} catch (UserNonexistentException ue) {
+			ra.addFlashAttribute("msgErroAdd", ue.getMessage());
+		}
+
+		return "redirect:/esqueceu-senha";
+
 	}
 
 	@GetMapping("/alterar-senha")
@@ -61,19 +69,28 @@ public class UserController {
 	}
 
 	@PostMapping("/nova-senha")
-		public String viewAlterPassword(User user, String passwordValid, Model model)  {
+	public String viewAlterPassword(User user, String passwordValid, Model model, RedirectAttributes ra) {
 
-		User u = userService.searchByCod(user.getCodVerificar());
+		try {
 
-		// comparar se o código digitado pelo usuário é igual ao que estar no banco de dados
-		if (!user.getCodVerificar().equals(u.getCodVerificar())) {
-			return "redirect:/esqueceu-senha";
+			// verificar se a senha digitada é igual a senha de confirmação
+			userService.validPassword(user, passwordValid);
+
+			User u = userService.searchByCod(user.getCodVerificar());
+
+			// comparar se o código digitado pelo usuário é igual ao que estar no banco de dados
+			userService.validCod(u, user);
+
+			// user.setCodVerificar(null);
+			userService.alterPassword(u, user.getPassword());
+
+			return "redirect:/login";
+			
+		} catch (UserInvalid e) {
+			ra.addFlashAttribute("msgErro2", e.getMessage());
 		}
 
-		//user.setCodVerificar(null);
-		userService.alterPassword(u, user.getPassword());
-
-		return "redirect:/login";
+		return "redirect:/alterar-senha";
 
 	}
 
@@ -90,11 +107,11 @@ public class UserController {
 
 	@GetMapping("/main-center")
 	public String viewProdCenter(Model model) {
-		
+
 		List<Product> list = productService.listProducts();
 
 		model.addAttribute("products", list);
-		
+
 		return "main-center";
 	}
 
@@ -122,7 +139,7 @@ public class UserController {
 	public String viewShoppBag() {
 		return "shopping_bag";
 	}
-	
+
 	@GetMapping("/pedidos")
 	public String viewHistor() {
 		return "historic";

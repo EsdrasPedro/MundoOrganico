@@ -116,6 +116,27 @@ public class UserService {
 		user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt(complexidadeSenha)));
 		userDAO.save(user);
 	}
+	
+    // verificar se a senha do usuário e a senha de confirmação são iguais.
+    public void validPassword(User user, String PasswordValid) throws UserInvalid {
+
+        if (!user.getPassword().equals(PasswordValid)) {
+            throw new UserInvalid("As senhas não coincidem.");
+        }
+    }
+    
+    public void validCod(User user, User userVerificar) throws UserInvalid {
+
+        if(user != null) {
+            if(!user.getCodVerificar().equals(userVerificar.getCodVerificar())) {
+                throw new UserInvalid("Código inválido.");
+            }
+        }
+        else {
+            throw new UserInvalid("Código inválido.");
+        }
+
+    }
 
 	// atualizar dados do usuário
 	public void updateDataC(User user) {
@@ -125,16 +146,23 @@ public class UserService {
 		userDAO.save(entity);
 	}
 
-	public void requestAlterPassword(String email) {
-		User user = userDAO.findByEmail1(email);
+    public void requestAlterPassword(String email) throws UserNonexistentException {
+        User user = userDAO.findByEmail1(email);
 
-		String verificador = RandomStringUtils.randomAlphanumeric(6);
-		user.setCodVerificar(verificador);
+        if(user != null) {
 
-		userDAO.save(user);
+            String verificador = RandomStringUtils.randomAlphanumeric(6);
+            user.setCodVerificar(verificador);
 
-		emailService.sendRequestAlterPassword(email, verificador);
+            userDAO.save(user);
 
-	}
+            emailService.sendRequestAlterPassword(email, verificador);
+
+        }
+        else {
+            throw new UserNonexistentException("Email não encontrado");
+        }
+
+    }
 
 }
