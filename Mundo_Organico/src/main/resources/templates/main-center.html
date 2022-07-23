@@ -59,17 +59,16 @@
             <div class="col-md-17 ms-sm-auto px-md-2">
                 
                 <div class="px-4 pt-4">
-                    <div class="d-flex">
-
-                        <div class="col-md-01 bg-white card-product me-4" th:each="prod : ${products}">
+                    <div class="row">
+                        
+                        <a href="#" class="col-md-01 bg-white card-product link-dark" style="text-decoration: none;" th:each="prod : ${products}">
                             <div>
                                 <div>
                                     <img th:src="@{(${prod.src})}" alt="" width="100%" height="128" class="border-img">
                                 </div>
                                 <div class="card-product-body">
-                                     <div class="fw-semibold pt-1">
-                                        <span th:text="${prod.name}">
-                                        </span>
+                                    <div class="fw-semibold pt-1">
+                                        <span th:text="${prod.name}"></span>
                                         <div class="row pt-2">
                                             <small class="h-small fw-normal lh-sm">
                                                 Menor preço
@@ -79,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                     </div>
                 </div>
