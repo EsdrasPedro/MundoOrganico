@@ -11,7 +11,7 @@
 </head>
 <body class="bg-light">
     
-    <header th:replace="fragments/headerLogin :: header_login"></header>
+    <header th:replace="fragments/headerInternal :: header_internal"></header>
 
     <div class="row">
         <div class="flex-shrink-0">
@@ -21,7 +21,7 @@
         <main class="flex-nowrap d-flex">
             <div class="col-md-13 ms-sm-auto px-md-2">
                 <div class="pt-1">
-                    <a href="#" class="link-dark">
+                    <a th:href="@{/main-center}" class="link-dark">
                         <svg width="14" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 1L1 8L8 15M1 8H17H1Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>  
@@ -30,19 +30,21 @@
                 
                 <div class="row">
 
-                    <div class="modal-mod-var modal-signin position-static d-block col-7">
+                    <div class="modal-mod-var modal-signin position-static d-block col-7" th:each="prod : ${product}">
                         <div class="modal-dialog modal-dialog-big">
                             <div class="modal-content rounded-4 expand-max">
     
                                 <div class="modal-body p-4 pb-5 border-bottom-0 row">
     
-                                    <div class="text-center" style="height: 40vh; width: 460px; max-width: 100vh;height: -webkit-fill-available">
-                                        <img src="" alt="">
+                                    <div class="text-center">
+                                        <img th:src="@{(${prod.src})}" width="100%" height="288px" class="border-img">
                                     </div>
 
-                                    <div class="ps-2 d-flex">
+                                    <div class="ps-2 pt-2 d-flex">
                                         <div class="row">
-                                            <h5 class="fw-semibold">Fruta 1</h5>
+                                            <h5 class="fw-semibold">
+                                            	<span th:text="${prod.name}"></span>
+                                            </h5>
                                             <small class="lh-sm fw-normal mb-2">
                                                 Vendedor 1
                                             </small>
@@ -51,11 +53,11 @@
                                             </small>
                                             <div class="mb-3 d-flex">
                                                 <div class="d-lg-flex fw-semibold">
-                                                    R$ 0,00
+                                                    <span th:text="${prod.value}"></span>
                                                 </div>
                                             </div>
                                             <small class="fw-lighter lh-sm" style="height: 9vh; height: -webkit-fill-available; max-height: 9vh;">
-                                                Descrição do produto
+                                                <span th:text="${prod.description}"></span>
                                             </small>
                                             <div class="d-flex justify-content-end me-4">
                                                 
