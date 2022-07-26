@@ -107,12 +107,18 @@ public class UserController {
 
 	@GetMapping("/main-center")
 	public String viewProdCenter(Model model) {
-
 		List<Product> list = productService.listProducts();
-
 		model.addAttribute("products", list);
-
+		
 		return "main-center";
+	}
+	
+	@GetMapping("/produto")
+	public String viewProduct(Integer id, Model model) {
+		Product prod = this.productService.findById(id);
+		model.addAttribute("product", prod);
+		
+		return "request";
 	}
 
 	@GetMapping("/frutas")
@@ -155,6 +161,7 @@ public class UserController {
 		User user = userService.findById(id);
 		System.out.println(user);
 		model.addAttribute("user", user);
+		
 		return "settings_personal_information";
 	}
 
@@ -163,6 +170,7 @@ public class UserController {
 		User user = userService.findById(id);
 		System.out.println(user);
 		model.addAttribute("user", user);
+		
 		return "settings_credentials";
 	}
 
@@ -194,6 +202,7 @@ public class UserController {
 		user.setPassword(userService.criptografarPassword(user));
 		userService.save(user);
 		userService.emailSend(user);
+		
 		return "index";
 	}
 
@@ -203,9 +212,7 @@ public class UserController {
 
 		try {
 			User logado = this.userService.login(email, password);
-
 			session.setAttribute("logado", logado);
-
 			return "redirect:/main-center";
 
 		} catch (UserNonexistentException e) {
@@ -222,7 +229,7 @@ public class UserController {
 	public String updateUser(@ModelAttribute User user, Model model) {
 		model.addAttribute("user", user);
 		userService.updateData(user);
-
+		
 		return "redirect:/meus-dados";
 	}
 
