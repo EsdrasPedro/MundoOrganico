@@ -34,38 +34,49 @@
                         <div class="modal-dialog modal-dialog-big">
                             <div class="modal-content rounded-4 expand-max">
     
-                                <div class="modal-body p-4 pb-5 border-bottom-0 row">
-    
-                                    <div class="text-center">
-                                        <img th:src="@{(${prod.src})}" width="100%" height="288px" class="border-img">
-                                    </div>
+                                <div class="modal-body p-3 pb-5 border-bottom-0">
+                                    
+                                    <img th:src="@{(${prod.src})}" class="border-img img-tm">
 
-                                    <div class="ps-2 pt-2 d-flex">
-                                        <div class="row">
-                                            <h5 class="fw-semibold">
+                                    <div class="ps-3 pt-4 pe-4">
+                                        <div>
+                                            <h5 class="fw-semibold mb-1">
                                             	<span th:text="${prod.name}"></span>
                                             </h5>
-                                            <small class="lh-sm fw-normal mb-2">
-                                                Vendedor 1
-                                            </small>
-                                            <small class="h-small fw-normal lh-sm">
-                                                Menor preço
-                                            </small>
-                                            <div class="mb-3 d-flex">
-                                                <div class="d-lg-flex fw-semibold">
+                                                <small class="lh-sm fw-normal fs-7">
+                                                    Vendedor 1
+                                                </small>
+                                            <div class="mb-2 lh-1 mt-1">
+                                                <small class="h-small fw-semibold lh-sm fs-8">
+                                                    Menor preço
+                                                </small>
+                                                <div class="d-lg-flex fw-semibold fs-5">
                                                     <span th:text="${prod.value}"></span>
                                                 </div>
                                             </div>
-                                            <small class="fw-lighter lh-sm" style="height: 9vh; height: -webkit-fill-available; max-height: 9vh;">
-                                                <span th:text="${prod.description}"></span>
-                                            </small>
-                                            <div class="d-flex justify-content-end me-4">
-                                                
-                                                <a href="#" style="text-decoration: none; display: flex; color: #000;">
-                                                    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M17.5 0C18.0802 0 18.6366 0.230469 19.0468 0.640704C19.457 1.05094 19.6875 1.60734 19.6875 2.1875V15.3125H32.8125C33.3927 15.3125 33.9491 15.543 34.3593 15.9532C34.7695 16.3634 35 16.9198 35 17.5C35 18.0802 34.7695 18.6366 34.3593 19.0468C33.9491 19.457 33.3927 19.6875 32.8125 19.6875H19.6875V32.8125C19.6875 33.3927 19.457 33.9491 19.0468 34.3593C18.6366 34.7695 18.0802 35 17.5 35C16.9198 35 16.3634 34.7695 15.9532 34.3593C15.543 33.9491 15.3125 33.3927 15.3125 32.8125V19.6875H2.1875C1.60734 19.6875 1.05094 19.457 0.640704 19.0468C0.230469 18.6366 0 18.0802 0 17.5C0 16.9198 0.230469 16.3634 0.640704 15.9532C1.05094 15.543 1.60734 15.3125 2.1875 15.3125H15.3125V2.1875C15.3125 1.60734 15.543 1.05094 15.9532 0.640704C16.3634 0.230469 16.9198 0 17.5 0Z" fill="#FFD500"/>
-                                                    </svg>
-                                                </a>
+                                            <div class="d-flex distant">
+                                                <small class="fw-light lh-sm fs-7">
+                                                    <span th:text="${prod.description}"></span>
+                                                </small>
+                                                <div class="d-flex ms-auto align-items-end">
+                                                    <a href="#" class="me-2">
+                                                        <svg width="29" height="4" viewBox="0 0 29 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <mask id="path-1-outside-1_480_5" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="4" fill="black">
+                                                                <rect fill="white" width="29" height="4"/>
+                                                                <path d="M27 2H2Z"/>
+                                                            </mask>
+                                                            <path d="M27 4C28.1046 4 29 3.10457 29 2C29 0.895431 28.1046 0 27 0V4ZM2 0C0.895431 0 0 0.895431 0 2C0 3.10457 0.895431 4 2 4V0ZM27 0H2V4H27V0Z" fill="#FFD500" mask="url(#path-1-outside-1_480_5)"/>
+                                                        </svg>
+                                                    </a>
+                                                    <div>
+
+                                                    </div>  
+                                                    <a href="#" class="ms-2">
+                                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15 0C15.4973 0 15.9742 0.197544 16.3258 0.549175C16.6775 0.900806 16.875 1.37772 16.875 1.875V13.125H28.125C28.6223 13.125 29.0992 13.3225 29.4508 13.6742C29.8025 14.0258 30 14.5027 30 15C30 15.4973 29.8025 15.9742 29.4508 16.3258C29.0992 16.6775 28.6223 16.875 28.125 16.875H16.875V28.125C16.875 28.6223 16.6775 29.0992 16.3258 29.4508C15.9742 29.8025 15.4973 30 15 30C14.5027 30 14.0258 29.8025 13.6742 29.4508C13.3225 29.0992 13.125 28.6223 13.125 28.125V16.875H1.875C1.37772 16.875 0.900806 16.6775 0.549175 16.3258C0.197544 15.9742 0 15.4973 0 15C0 14.5027 0.197544 14.0258 0.549175 13.6742C0.900806 13.3225 1.37772 13.125 1.875 13.125H13.125V1.875C13.125 1.37772 13.3225 0.900806 13.6742 0.549175C14.0258 0.197544 14.5027 0 15 0Z" fill="#FFD500"/>
+                                                        </svg>
+                                                    </a> 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
