@@ -426,3 +426,20 @@
 .border-img{
     border-radius: 0.7rem; 
 }
+
+.fs-7{
+    font-size: .8rem!important;
+}
+
+.fs-8{
+    font-size: .7rem!important;
+}
+
+.img-tm{
+    width: 100%;
+    height: 60%;
+}
+
+.distant{
+    height: 15vh;
+}
