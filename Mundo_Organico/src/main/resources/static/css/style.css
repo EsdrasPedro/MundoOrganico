@@ -88,7 +88,11 @@
 }
 
 .mt-6{
-    margin-top:4rem!important
+    margin-top:4rem!important;
+}
+
+.mt-7{
+    margin-top: 6rem!important;
 }
 
 .mt-04{
@@ -442,4 +446,66 @@
 
 .distant{
     height: 15vh;
+}
+
+.hh-small{
+    font-size: 12px;
+}
+
+@media (min-width: 1400px){
+    .container {
+        max-width: 1452px!important;
+    }
+}
+
+@media (min-width: 1400px){
+    .container-sm{
+        max-width: 1252px!important;
+    }
+}
+
+.body{
+    background-image: url("../img/fundo1.png");
+    background-repeat: no-repeat;
+    background-size: 60%;
+    width: 100%;
+}
+
+.adjust-1 {
+    top: 0px;
+    height: 50px;
+    padding-top: 0 !important;
+    --bs-navbar-padding-y: 0 !important;
+}
+
+.dimention-1{
+    width: 30rem;
+}
+
+.dimention-2{
+    width: 20rem;
+}
+
+.dimention-3{
+    width: 21rem;
+}
+
+.dimention-4{
+    width: 13rem;
+}
+
+.dimention-5{
+    width: 17rem;
+}
+
+.mt-12{
+    margin-top:20vh!important
+}
+
+.mt-20{
+    margin-top: .65rem;
+}
+
+.hh6{
+    font-size: 1.15rem!important;
 }
