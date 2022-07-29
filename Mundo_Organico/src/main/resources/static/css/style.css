@@ -6,6 +6,13 @@
     --bs-navbar-padding-y: 0!important;
 }
 
+.adjusttt{
+    top:0px;
+    height: 50px;
+    padding-top: 0!important;
+    --bs-navbar-padding-y: 0!important;
+}
+
 .button-ball{
     height: 33px;
     width: 33px;
@@ -435,13 +442,17 @@
     font-size: .8rem!important;
 }
 
+.fs-9{
+    font-size: .88rem!important;
+}
+
 .fs-8{
     font-size: .7rem!important;
 }
 
 .img-tm{
     width: 100%;
-    height: 60%;
+    height: 47vh;
 }
 
 .distant{
