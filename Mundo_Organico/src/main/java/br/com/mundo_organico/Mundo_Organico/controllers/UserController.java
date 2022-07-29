@@ -35,7 +35,28 @@ public class UserController {
 	private ProductService productService;
 
 	@GetMapping("/")
-	public String viewIndex() {
+	public String viewIndex(Model model) {
+		
+		List<Product> list = productService.listProducts();
+		for(Product p: list) {
+			if(p.getId().equals(2)) {
+				break;
+			}
+			model.addAttribute("products", p);
+		}
+		for(Product p: list) {
+			if(p.getId().equals(3)) {
+				break;
+			}
+			model.addAttribute("products2", p);
+		}
+		for(Product p: list) {
+			if(p.getId().equals(4)) {
+				break;
+			}
+			model.addAttribute("products3", p);
+		}
+
 		return "index";
 	}
 
