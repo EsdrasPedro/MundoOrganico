@@ -45,13 +45,13 @@ public class UserController {
 			model.addAttribute("products", p);
 		}
 		for(Product p: list) {
-			if(p.getId().equals(3)) {
+			if(p.getId().equals(9)) {
 				break;
 			}
 			model.addAttribute("products2", p);
 		}
 		for(Product p: list) {
-			if(p.getId().equals(4)) {
+			if(p.getId().equals(6)) {
 				break;
 			}
 			model.addAttribute("products3", p);
