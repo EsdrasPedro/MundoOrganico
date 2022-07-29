@@ -453,6 +453,7 @@
 .img-tm{
     width: 100%;
     height: 47vh;
+    object-fit: cover;
 }
 
 .distant{
@@ -519,4 +520,8 @@
 
 .hh6{
     font-size: 1.15rem!important;
+}
+
+.pt-004{
+    padding-top: 2.5rem!important;
 }

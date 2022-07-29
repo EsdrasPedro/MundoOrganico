@@ -58,7 +58,7 @@
                             <div class="col-md-01 bg-white card-product link-dark border border-light border-1 shadow-sm" style="width: 100%;" th:each="prod : ${products}">
                                 <div>
                                     <div>
-                                        <img th:src="@{(${prod.src})}" alt="" width="100%" height="125" class="border-img">
+                                        <img th:src="@{(${prod.src})}" alt="" width="100%" height="125" class="border-img" style="object-fit: cover;">
                                     </div>
                                     <div class="card-product-body">
                                         <div class="fw-semibold pt-1">
@@ -66,7 +66,10 @@
                                             <div class="row pt-2">
                                                 <small class="h-small fw-normal lh-sm">
                                                 </small>
-                                                <span th:text="${prod.value}"></span>
+                                                <div class="d-flex">
+                                            	<div class="me-1">R$</div>
+                                            	<span th:text="${prod.value}"></span>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +79,7 @@
                             <div class="col-md-01 bg-white card-product link-dark border border-light border-1 shadow-sm" style="width: 100%;" th:each="prod : ${products2}">
                                 <div>
                                     <div>
-                                        <img th:src="@{(${prod.src})}" alt="" width="100%" height="125" class="border-img">
+                                        <img th:src="@{(${prod.src})}" alt="" width="100%" height="125" class="border-img" style="object-fit: cover;">
                                     </div>
                                     <div class="card-product-body">
                                         <div class="fw-semibold pt-1">
@@ -84,7 +87,10 @@
                                             <div class="row pt-2">
                                                 <small class="h-small fw-normal lh-sm">
                                                 </small>
-                                                <span th:text="${prod.value}"></span>
+                                                <div class="d-flex">
+                                            		<div class="me-1">R$</div>
+                                            		<span th:text="${prod.value}"></span>
+                                            	</div>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +100,7 @@
                             <div class="col-md-01 bg-white card-product link-dark border border-light border-1 shadow-sm" style="width: 100%;" th:each="prod : ${products3}">
                                 <div>
                                     <div>
-                                        <img th:src="@{(${prod.src})}" alt="" width="100%" height="125" class="border-img">
+                                        <img th:src="@{(${prod.src})}" alt="" width="100%" height="125" class="border-img" style="object-fit: cover;">
                                     </div>
                                     <div class="card-product-body">
                                         <div class="fw-semibold pt-1">
@@ -102,7 +108,10 @@
                                             <div class="row pt-2">
                                                 <small class="h-small fw-normal lh-sm">
                                                 </small>
-                                                <span th:text="${prod.value}"></span>
+                                                <div class="d-flex">
+                                            		<div class="me-1">R$</div>
+                                            		<span th:text="${prod.value}"></span>
+                                            	</div>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +191,7 @@
                 </div>
             </div>
 
-            <div class="container align-content-center row" style="height: 86vh;">
+            <div class="container align-content-center mt-5 row" style="height: 86vh;">
                 <div class="d-flex justify-content-center">
                     <div class="d-flex me-5">
                         <div class="mt-5 me-3"> 
