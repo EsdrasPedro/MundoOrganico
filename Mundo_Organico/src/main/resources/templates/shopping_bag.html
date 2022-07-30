@@ -41,12 +41,12 @@
                                         </h5>
  
                                         <div class="table-responsive-sm pt-3 scron col-15">
-                                            <table class="table table-borderless table-sm" cellpadding="2" cellspacing="0">
+                                            <table class="table table-borderless table-sm" cellpadding="2" cellspacing="0" th:each="items : ${items}">
                                                 <tbody>
                                                     <tr>
-                                                        <td class="col-20 px-0">1x</td>
-                                                        <td class="col-4">Fruta 1</td>
-                                                        <td class="col-1 text-end">R$ 0,00</td>
+                                                        <td class="col-20 px-0" th:text="${items.amount}"></td>
+                                                        <td class="col-4" th:text="${items.product.name}"></td>
+                                                        <td class="col-1 text-end" th:text="${items.value}"></td>
                                                         <td class="col-1 text-center">
                                                             <a href="#">
                                                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -134,14 +134,6 @@ public class UserController {
 		return "main-center";
 	}
 	
-	@GetMapping("/produto")
-	public String viewProduct(Integer id, Model model) {
-		Product prod = this.productService.findById(id);
-		model.addAttribute("product", prod);
-		
-		return "request";
-	}
-
 	@GetMapping("/frutas")
 	public String viewCatFrut() {
 		return "main-fruit";
@@ -160,11 +152,6 @@ public class UserController {
 	@GetMapping("/temperos")
 	public String viewCatSeas() {
 		return "main-seasonings";
-	}
-
-	@GetMapping("/compra")
-	public String viewShoppBag() {
-		return "shopping_bag";
 	}
 
 	@GetMapping("/pedidos")
