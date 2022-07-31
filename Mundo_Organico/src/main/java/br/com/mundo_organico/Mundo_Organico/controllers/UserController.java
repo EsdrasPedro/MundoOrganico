@@ -134,26 +134,6 @@ public class UserController {
 		return "main-center";
 	}
 	
-	@GetMapping("/frutas")
-	public String viewCatFrut() {
-		return "main-fruit";
-	}
-
-	@GetMapping("/verduras")
-	public String viewCatVeget() {
-		return "main-vegetable";
-	}
-
-	@GetMapping("/hortalicas")
-	public String viewCatHort() {
-		return "main-vegetable-Hort";
-	}
-
-	@GetMapping("/temperos")
-	public String viewCatSeas() {
-		return "main-seasonings";
-	}
-
 	@GetMapping("/pedidos")
 	public String viewHistor() {
 		return "historic";

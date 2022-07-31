@@ -26,4 +26,27 @@ public class ProductService {
     	Optional<Product> obj = productDAO.findById(id);
     	return obj.get();
     }
+    
+    // retornar todos os produtos que sejam da categoria fruta
+    public List<Product> findByFruta() {
+        List<Product> prodFrutas = productDAO.findByFruta();
+        return prodFrutas;
+    }
+
+    // retornar todos os produtos que sejam da categoria verdura
+    public List<Product> findByVerdura() {
+        List<Product> prodVerdura = productDAO.findByVerdura();
+        return prodVerdura;
+    }
+
+    public List<Product> findByHortalica() {
+        List<Product> prodHortalica = productDAO.findByHortalica();
+        return prodHortalica;
+    }
+
+    public List<Product> findByTempero() {
+        List<Product> prodTempero = productDAO.findByTempero();
+        return prodTempero;
+    }
+    
 }
