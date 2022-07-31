@@ -36,14 +36,13 @@ public class RequestController {
     }
 
     @PostMapping("/adicionar-produto")
-    public String addProduct(Product product, Ordered_Items item, Model model) {
+    public String addProduct(Product product, Ordered_Items item, Model model, Integer quant) {
         Product prod = this.productService.findById(product.getId());
-        item.setAmount(1);
+        item.setAmount(quant);
         item.setValue(prod.getValue());
         item.setProduct(prod);
 
         items.add(item);
-
 
         return "redirect:/compra";
 
