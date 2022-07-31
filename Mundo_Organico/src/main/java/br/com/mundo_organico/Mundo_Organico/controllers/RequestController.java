@@ -39,7 +39,7 @@ public class RequestController {
     public String addProduct(Product product, Ordered_Items item, Model model, Integer quant) {
         Product prod = this.productService.findById(product.getId());
         item.setAmount(quant);
-        item.setValue(prod.getValue());
+        item.setValue((prod.getValue()* quant));
         item.setProduct(prod);
 
         items.add(item);
