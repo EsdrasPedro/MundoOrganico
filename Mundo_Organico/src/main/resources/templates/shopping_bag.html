@@ -145,13 +145,17 @@
                                         R$ 0,00
                                     </h5>
                                 </div>
-                                <div class="bott col-3">
-                                    <button class="button-w fw-bold py-wh-1 col-6" type="submit">
-                                        Confirmar
-                                    </button>
-                                </div>
-                            </div>
-
+                                <form method="POST" th:action="@{/criar-pedido}" th:object="${request}">
+                                    <div>
+                                        <input th:value="@{{id}(id=${session.logado.id})}" class="int" type="hidden" name="user">
+                                    </div>
+                                    <div class="bott col-3">
+                                        <button class="button-w fw-bold py-wh-1 col-6" type="submit">
+                                            Confirmar
+                                        </button>
+                                    </div>
+                                </form>
+                            
                         </div>
                     </div>
                 </div>
