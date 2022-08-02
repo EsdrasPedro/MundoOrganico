@@ -67,10 +67,22 @@ public class RequestController {
 
 
     @GetMapping("/compra")
-    public String viewShoppBag(Model model, Integer id, Ordered_Items item, Request request) {
+    public String viewShoppBag(Model model, Integer id, Ordered_Items item, Request request, Double entrega) {
+
+        double subTotal = 0;
+        for(Ordered_Items it : this.items) {
+            subTotal += it.getValue();
+        }
+        request.setSubTotal(subTotal);
+
+        entrega = 10.0;
+
+        request.setTotal(subTotal + entrega);
 
         model.addAttribute("items", this.items);
         model.addAttribute("request", request);
+        model.addAttribute("taxa", entrega);
+
 
         return "shopping_bag";
     }
@@ -85,7 +97,10 @@ public class RequestController {
             total += item.getValue();
         }
 
-        request.setAmount(total);
+        // total do pedido sem a entrega
+        request.setSubTotal(total);
+        // total do pedido com a entrega
+        request.setTotal(total + 10);
         request.setStatus("CONCLUÍDO");
 
         requestService.save(request);

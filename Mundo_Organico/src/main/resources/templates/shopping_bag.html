@@ -117,32 +117,34 @@
 
                             </div>
 
-                            <div class="d-flex p-5 pb-4 ps-6 px-4 pt-0">
-                                <div class="col-md-15">
-                                    <div class="d-flex">
-                                        <small class="h-small fw-semibold me-auto">
-                                            Subtotal
-                                        </small>
-                                        <small class="h-small fw-semibold">
-                                            R$ 0,00
-                                        </small>
-                                    </div>
-    
-                                    <div class="d-flex">
-                                        <small class="fw-semibold me-auto">
-                                            Taxa de entrega
-                                        </small>
-                                        <small class="fw-semibold">
-                                            R$ 0,00
-                                        </small>
+                            <div th:each="request : ${request}">
+                                <div class="d-flex p-5 pb-4 ps-6 px-4 pt-0">
+                                    <div class="col-md-15">
+                                        <div class="d-flex">
+                                            <small class="h-small fw-semibold me-auto">
+                                                Subtotal
+                                            </small>
+                                            <small class="h-small fw-semibold">
+                                                <span th:text="${request.subTotal}"></span>
+                                            </small>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <small class="fw-semibold me-auto">
+                                                Taxa de entrega
+                                            </small>
+                                            <small class="fw-semibold">
+                                                <span th:text="${taxa}"></span>
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="d-flex p-5 pb-4 ps-6 px-3">
-                                <div class="me-auto d-flex align-items-center">
+                            <div class="d-flex p-5 pb-4 ps-6 px-3" >
+                                <div class="me-auto d-flex align-items-center" th:each="request : ${request}">
                                     <h5 class="fw-semibold mb-0 h">
-                                        R$ 0,00
+                                        <span th:text="${request.total}"></span>
                                     </h5>
                                 </div>
                                 <form method="POST" th:action="@{/criar-pedido}" th:object="${request}">

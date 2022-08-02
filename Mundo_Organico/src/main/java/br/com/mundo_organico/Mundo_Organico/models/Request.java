@@ -24,11 +24,11 @@ public class Request {
 //	private Date time;
 //	private Date date;
 
-	@Column(nullable = false)
 	private String status;
 
-	@Column(nullable = false)
-	private Double amount;
+	private Double subTotal;
+
+	private Double total;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -56,13 +56,21 @@ public class Request {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public Double getAmount() {
-		return amount;
+	
+	public Double getSubTotal() {
+		return subTotal;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setSubTotal(Double subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
 	public User getUser() {
