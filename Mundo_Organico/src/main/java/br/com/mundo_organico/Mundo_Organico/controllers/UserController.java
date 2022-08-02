@@ -57,7 +57,7 @@ public class UserController {
 			model.addAttribute("products3", p);
 		}
 
-		return "index";
+		return "redirect:/";
 	}
 
 	@GetMapping("/cadastro")
