@@ -3,6 +3,9 @@ package br.com.mundo_organico.Mundo_Organico.controllers;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.mundo_organico.Mundo_Organico.models.Address;
+import br.com.mundo_organico.Mundo_Organico.services.AddressService;
+import br.com.mundo_organico.Mundo_Organico.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import br.com.mundo_organico.Mundo_Organico.models.Product;
 import br.com.mundo_organico.Mundo_Organico.repositories.OrderedItemsDAO;
 import br.com.mundo_organico.Mundo_Organico.services.ProductService;
 
+
 @Controller
 public class RequestController {
 	
@@ -22,6 +26,9 @@ public class RequestController {
 	
 	@Autowired
     private OrderedItemsDAO orderedItemsDAO;
+
+    @Autowired
+    private AddressService addressService;
 
     private Set<Ordered_Items> items = new HashSet<Ordered_Items>();
 
@@ -47,6 +54,13 @@ public class RequestController {
         return "redirect:/compra";
 
     }
+
+    @PostMapping("/adicionar-endereco")
+    public String addAddress(Address address){
+        this.addressService.save(address);
+        return "redirect:/compra";
+    }
+
 
     @GetMapping("/compra")
     public String viewShoppBag(Model model, Integer id, Ordered_Items item) {

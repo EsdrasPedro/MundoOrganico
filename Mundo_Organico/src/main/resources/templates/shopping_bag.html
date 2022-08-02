@@ -75,31 +75,37 @@
                                             Entrega
                                         </h5>
             
-                                        <form action="">
+                                        <form action="" method="post" th:action="@{/adicionar-endereco}">
                                             <div class="pt-2">
                                                 <div class="col-11 pt-3">
                                                     <label class="form-label hh">Endereço</label>
-                                                    <input class="Text" type="text" required>
+                                                    <input class="Text" type="text" name="location" required>
                                                 </div>
     
                                                 <div class="row g-2 col pt-2 col-11">
                                                     <div class="col-sm-4">
                                                         <label class="form-label hh">Número</label>
-                                                        <input class="Text" type="text" required>
+                                                        <input class="Text" type="text" name="number">
                                                     </div>
         
                                                     <div class="ps-3 col">
                                                         <label class="form-label hh">Complemento</label>
-                                                        <input class="Text" type="text" required>
+                                                        <input class="Text" type="text" name="complement">
                                                     </div>
                                                 </div>
     
                                                 <div class="col-11 pt-2">
                                                     <label class="form-label hh">Referência</label>
-                                                    <input class="Text" type="text" required>
+                                                    <input class="Text" type="text" name="reference">
+                                                </div>
+
+                                                <div>
+
+                                                    <input th:value="@{{id}(id=${session.logado.id})}" class="int" type="hidden" name="user">
                                                 </div>
     
                                                 <div class="bott col-11 pt-4">
+
                                                     <button class="button-w fw-bold py-wh-1 col-6" type="submit">
                                                         Salvar endereço
                                                     </button>
