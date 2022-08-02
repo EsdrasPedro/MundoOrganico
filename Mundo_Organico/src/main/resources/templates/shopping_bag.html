@@ -11,9 +11,9 @@
 </head>
 <body class="bg-light">
 
-    <header th:replace="fragments/headerInternal :: header_internal"></header>
+    <header th:replace="fragments/headerInternal2 :: header_internal2"></header>
 
-    <div class="row mt-5">
+    <div class="row">
         <div class="flex-shrink-0">
             <nav th:replace="fragments/sidebarSecondary :: sidebar_second"></nav>
         </div>
@@ -44,9 +44,19 @@
                                             <table class="table table-borderless table-sm" cellpadding="2" cellspacing="0" th:each="items : ${items}">
                                                 <tbody>
                                                     <tr>
-                                                        <td class="col-20 px-0" th:text="${items.amount}"></td>
+                                                        <td class="col-20 px-0">
+                                                            <div class="d-flex">
+                                                                <div th:text="${items.amount}"></div>
+                                                                <div class="ms-1">x</div>
+                                                            </div>
+                                                        </td>
                                                         <td class="col-4" th:text="${items.product.name}"></td>
-                                                        <td class="col-1 text-end" th:text="${items.value}"></td>
+                                                        <td class="col-1 text-end"> 
+                                                            <div class="d-flex justify-content-end">
+                                                                <div>R$</div> 
+                                                                <div class="ms-1" th:text="${items.value}"></div> 
+                                                            </div>
+                                                        </td>
                                                         <td class="col-1 text-center">
                                                             <a href="#">
                                                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,8 +134,9 @@
                                             <small class="h-small fw-semibold me-auto">
                                                 Subtotal
                                             </small>
-                                            <small class="h-small fw-semibold">
-                                                <span th:text="${request.subTotal}"></span>
+                                            <small class="h-small fw-semibold d-flex">
+                                                <div>R$</div>
+                                                <span class="ms-1" th:text="${request.subTotal}"></span>
                                             </small>
                                         </div>
 
@@ -133,8 +144,9 @@
                                             <small class="fw-semibold me-auto">
                                                 Taxa de entrega
                                             </small>
-                                            <small class="fw-semibold">
-                                                <span th:text="${taxa}"></span>
+                                            <small class="fw-semibold d-flex">
+                                                <div>R$</div>
+                                                <span class="ms-1" th:text="${taxa}"></span>
                                             </small>
                                         </div>
                                     </div>
@@ -143,8 +155,9 @@
 
                             <div class="d-flex p-5 pb-4 ps-6 px-3" >
                                 <div class="me-auto d-flex align-items-center" th:each="request : ${request}">
-                                    <h5 class="fw-semibold mb-0 h">
-                                        <span th:text="${request.total}"></span>
+                                    <h5 class="fw-semibold mb-0 h d-flex">
+                                        <div>R$</div>
+                                        <span class="ms-1" th:text="${request.total}"></span>
                                     </h5>
                                 </div>
                                 <form method="POST" th:action="@{/criar-pedido}" th:object="${request}">
@@ -152,12 +165,12 @@
                                         <input th:value="@{{id}(id=${session.logado.id})}" class="int" type="hidden" name="user">
                                     </div>
                                     <div class="bott col-3">
-                                        <button class="button-w fw-bold py-wh-1 col-6" type="submit">
+                                        <button class="button-w fw-bold py-wh-1 px-md-4" type="submit">
                                             Confirmar
                                         </button>
                                     </div>
                                 </form>
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
