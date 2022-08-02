@@ -57,7 +57,7 @@ public class UserController {
 			model.addAttribute("products3", p);
 		}
 
-		return "redirect:/";
+		return "index";
 	}
 
 	@GetMapping("/cadastro")
@@ -191,7 +191,7 @@ public class UserController {
 		userService.save(user);
 		userService.emailSend(user);
 		
-		return "index";
+		return "redirect:/";
 	}
 
 	@PostMapping("/logar")
