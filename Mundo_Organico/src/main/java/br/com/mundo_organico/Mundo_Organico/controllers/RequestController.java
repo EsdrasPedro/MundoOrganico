@@ -67,7 +67,7 @@ public class RequestController {
 
 
     @GetMapping("/compra")
-    public String viewShoppBag(Model model, Integer id, Ordered_Items item, Request request, Double entrega) {
+    public String viewShoppBag(Model model, Integer id, Ordered_Items item, Request request, Double entrega, Integer idProd) {
 
         double subTotal = 0;
         for(Ordered_Items it : this.items) {
@@ -80,8 +80,10 @@ public class RequestController {
         request.setTotal(subTotal + entrega);
 
         model.addAttribute("items", this.items);
+        model.addAttribute("item", item);
         model.addAttribute("request", request);
         model.addAttribute("taxa", entrega);
+        model.addAttribute("idProd", idProd);
 
 
         return "shopping_bag";
@@ -109,6 +111,18 @@ public class RequestController {
         this.items = new HashSet<Ordered_Items>();
 
         return "redirect:/main-center";
+    }
+    
+    @PostMapping("/deletar-item")
+    public String updateItem(Integer idProd) {
+        for (Ordered_Items it : this.items) {
+            if(it.getProduct().getId().equals(idProd)) {
+                this.items.remove(it);
+                return "redirect:/compra";
+            }
+        }
+
+        return "redirect:/compra";
     }
 
 }
