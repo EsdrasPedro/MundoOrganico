@@ -529,3 +529,28 @@
 .mt-006{
     margin-top: 2.35rem!important;
 }
+
+.modal-dialog-min3 {
+    margin-left: 4rem!important;
+    margin-right: 4rem!important;
+}
+
+.modal-dialog-min4 {
+    margin-left: 5.5rem!important;
+}
+
+.card-histor {
+    border-radius: 0.5rem;
+    padding: 1.3rem;
+    padding-top: 1.15rem!important;
+    margin: 0.5rem;
+      margin-right: 0.5rem;
+    margin-right: .99rem;
+    height: 195px;
+}
+
+.col-md-001 {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 615px;
+}
