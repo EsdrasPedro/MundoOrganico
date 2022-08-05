@@ -27,4 +27,8 @@ public class RequestService {
         List<Ordered_Items> items = orderedItemsDAO.findAll();
         return items;
     }
+    
+    public List<Ordered_Items> listItemsByUser(Integer id) {
+        return orderedItemsDAO.findItemsByUser(id);
+    }
 }

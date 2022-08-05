@@ -85,6 +85,10 @@
 	
 	                                                    </div>
 	                            							<input type="hidden" th:field="*{id}">
+	                            							
+	                            						<div>
+                                                            <input th:value="@{{user}(user=${session.logado.id})}" type="hidden" name="userId">
+                                                        </div>
 	
 		                        						<div class="mt-3 d-flex justify-content-center">
 		                            						<button class="button-w fw-bold py-md-1 fs-9 px-md-4" type="submit">Adicionar</button>

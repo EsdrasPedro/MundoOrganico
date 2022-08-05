@@ -30,6 +30,10 @@ public class Ordered_Items {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Ordered_Items() {
 		super();
@@ -57,6 +61,14 @@ public class Ordered_Items {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Request getRequest() {
