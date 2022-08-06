@@ -554,3 +554,9 @@
     width: 100%;
     max-width: 615px;
 }
+
+.modal-dialog1 {
+  position: relative;
+  width: auto;
+  margin: var(--bs-modal-margin);
+}
