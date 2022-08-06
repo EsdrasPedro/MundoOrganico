@@ -16,11 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mundo_organico.Mundo_Organico.exception.UserInvalid;
 import br.com.mundo_organico.Mundo_Organico.exception.UserNonexistentException;
-import br.com.mundo_organico.Mundo_Organico.services.ProductService;
-import br.com.mundo_organico.Mundo_Organico.services.UserService;
 import br.com.mundo_organico.Mundo_Organico.models.Product;
+import br.com.mundo_organico.Mundo_Organico.models.Request;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.UserDAO;
+import br.com.mundo_organico.Mundo_Organico.services.ProductService;
+import br.com.mundo_organico.Mundo_Organico.services.RequestService;
+import br.com.mundo_organico.Mundo_Organico.services.UserService;
 
 @Controller
 public class UserController {
@@ -34,24 +36,27 @@ public class UserController {
 	@Autowired
 	private ProductService productService;
 
+	@Autowired
+	private RequestService requestService;
+
 	@GetMapping("/")
 	public String viewIndex(Model model) {
-		
+
 		List<Product> list = productService.listProducts();
-		for(Product p: list) {
-			if(p.getId().equals(2)) {
+		for (Product p : list) {
+			if (p.getId().equals(2)) {
 				break;
 			}
 			model.addAttribute("products", p);
 		}
-		for(Product p: list) {
-			if(p.getId().equals(9)) {
+		for (Product p : list) {
+			if (p.getId().equals(9)) {
 				break;
 			}
 			model.addAttribute("products2", p);
 		}
-		for(Product p: list) {
-			if(p.getId().equals(6)) {
+		for (Product p : list) {
+			if (p.getId().equals(6)) {
 				break;
 			}
 			model.addAttribute("products3", p);
@@ -99,14 +104,15 @@ public class UserController {
 
 			User u = userService.searchByCod(user.getCodVerificar());
 
-			// comparar se o código digitado pelo usuário é igual ao que estar no banco de dados
+			// comparar se o código digitado pelo usuário é igual ao que estar no banco de
+			// dados
 			userService.validCod(u, user);
 
 			// user.setCodVerificar(null);
 			userService.alterPassword(u, user.getPassword());
 
 			return "redirect:/login";
-			
+
 		} catch (UserInvalid e) {
 			ra.addFlashAttribute("msgErro2", e.getMessage());
 		}
@@ -130,12 +136,15 @@ public class UserController {
 	public String viewProdCenter(Model model) {
 		List<Product> list = productService.listProducts();
 		model.addAttribute("products", list);
-		
+
 		return "main-center";
 	}
-	
-	@GetMapping("/pedidos")
-	public String viewHistor() {
+
+	@GetMapping("/pedidos/{id}")
+	public String viewHistor(@PathVariable Integer id, Model model) {
+		List<Request> list = requestService.listRequests(id);
+		model.addAttribute("request", list);
+
 		return "historic";
 	}
 
@@ -149,7 +158,7 @@ public class UserController {
 		User user = userService.findById(id);
 		System.out.println(user);
 		model.addAttribute("user", user);
-		
+
 		return "settings_personal_information";
 	}
 
@@ -158,7 +167,7 @@ public class UserController {
 		User user = userService.findById(id);
 		System.out.println(user);
 		model.addAttribute("user", user);
-		
+
 		return "settings_credentials";
 	}
 
@@ -190,7 +199,7 @@ public class UserController {
 		user.setPassword(userService.criptografarPassword(user));
 		userService.save(user);
 		userService.emailSend(user);
-		
+
 		return "redirect:/";
 	}
 
@@ -217,7 +226,7 @@ public class UserController {
 	public String updateUser(@ModelAttribute User user, Model model) {
 		model.addAttribute("user", user);
 		userService.updateData(user);
-		
+
 		return "redirect:/meus-dados";
 	}
 

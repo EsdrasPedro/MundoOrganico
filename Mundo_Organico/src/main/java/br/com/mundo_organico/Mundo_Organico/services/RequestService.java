@@ -1,6 +1,7 @@
 package br.com.mundo_organico.Mundo_Organico.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,15 @@ public class RequestService {
     public List<Ordered_Items> listItemsByUser(Integer id) {
         return orderedItemsDAO.findItemsByUser(id);
     }
+    
+    public Request findById(Integer id) {
+    	Optional<Request> obj = requestDAO.findById(id);
+    	return obj.get();
+    }
+
+	public List<Request> listRequests(Integer id) {
+		List<Request> lista = requestDAO.findByUserId(id);
+		return lista;
+	}
+    
 }
