@@ -1,23 +1,21 @@
 package br.com.mundo_organico.Mundo_Organico.controllers;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import br.com.mundo_organico.Mundo_Organico.models.Address;
-import br.com.mundo_organico.Mundo_Organico.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import br.com.mundo_organico.Mundo_Organico.models.Address;
 import br.com.mundo_organico.Mundo_Organico.models.Ordered_Items;
 import br.com.mundo_organico.Mundo_Organico.models.Product;
 import br.com.mundo_organico.Mundo_Organico.models.Request;
 import br.com.mundo_organico.Mundo_Organico.models.User;
 import br.com.mundo_organico.Mundo_Organico.repositories.OrderedItemsDAO;
+import br.com.mundo_organico.Mundo_Organico.services.AddressService;
 import br.com.mundo_organico.Mundo_Organico.services.ProductService;
 import br.com.mundo_organico.Mundo_Organico.services.RequestService;
 import br.com.mundo_organico.Mundo_Organico.services.UserService;
@@ -49,6 +47,14 @@ public class RequestController {
         model.addAttribute("userId", userId);
 
         return "request";
+    }
+    
+    @GetMapping("/pedido")
+    public String viewRequest(Integer id, Model model) {
+    	Request req = this.requestService.findById(id);
+    	model.addAttribute("pedido", req);
+    	
+    	return "invoice";
     }
 
     @PostMapping("/adicionar-produto")
