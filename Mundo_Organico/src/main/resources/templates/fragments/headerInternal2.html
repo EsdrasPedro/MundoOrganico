@@ -37,7 +37,7 @@
                         </svg>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuOffset">
-                        <li><a class="dropdown-item" th:href="@{/pedidos}">Pedidos</a></li>
+                        <li><a class="dropdown-item" th:href="@{/pedidos/{id}(id=${session.logado.id})}">Pedidos</a></li>
                         <li><a class="dropdown-item" th:href="@{/meus-dados}">Meus Dados</a></li>
                         <li><a class="dropdown-item" th:href="@{/sair}">Sair</a></li>
                       </ul>
