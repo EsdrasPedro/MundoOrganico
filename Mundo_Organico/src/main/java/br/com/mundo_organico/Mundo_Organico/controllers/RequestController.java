@@ -51,15 +51,17 @@ public class RequestController {
     
     @GetMapping("/pedido")
     public String viewRequest(Integer id, Model model) {
-    	Request req = this.requestService.findById(id);
-    	model.addAttribute("pedido", req);
-    	
-    	return "invoice";
+        Request req = this.requestService.findById(id);
+        List<Ordered_Items> items = requestService.listItemsByRequest(id);
+
+        model.addAttribute("pedido", req);
+        model.addAttribute("items", items);
+
+        return "invoice";
     }
 
     @PostMapping("/adicionar-produto")
     public String addProduct(Product product, Ordered_Items item, Model model, Integer quant, Integer userId) {
-
 
         List<Ordered_Items> items = requestService.listItemsByUser(userId);
         Ordered_Items newItem = new Ordered_Items();
@@ -76,18 +78,28 @@ public class RequestController {
         for(Ordered_Items it : items) {
             if(it.getProduct().getId().equals(prod.getId()) && it.getRequest() == null) {
                 it.setAmount(item.getAmount());
+                it.setValue(prod.getValue() * quant);
                 orderedItemsDAO.save(it);
                 return "redirect:/compra?id=" + userId;
             }
             // setando um novo item caso já tenha algum item com um pedido finalizado
             else if(it.getRequest() != null) {
-
-                newItem.setRequest(null);
                 newItem.setAmount(quant);
                 newItem.setValue(prod.getValue() * quant);
                 newItem.setProduct(prod);
                 newItem.setUser(user);
+
+                for (Ordered_Items itemVerificar : items) {
+                    if(itemVerificar.getProduct().getId().equals(prod.getId()) && itemVerificar.getRequest() == null) {
+                        itemVerificar.setAmount(item.getAmount());
+                        itemVerificar.setValue(prod.getValue() * quant);
+                        orderedItemsDAO.save(itemVerificar);
+                        return "redirect:/compra?id=" + userId;
+                    }
+                }
+
                 orderedItemsDAO.save(newItem);
+
                 return "redirect:/compra?id=" + userId;
             }
         }
