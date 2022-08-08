@@ -29,27 +29,31 @@
     
                 <div class="modal-mod-var modal-signin position-static d-block">
                     <div class="modal-dialog">
-                        <div class="modal-content rounded-4 expand" th:each="req : ${pedido}">
+                        <div class="modal-content rounded-4 expand">
 
-                            <div class="modal-body p-5 pb-3 ps-5 border-bottom-0 mb-auto row">
+                            <div class="modal-body p-5 pb-3 ps-5 border-bottom-0 mb-auto row" th:each="req : ${pedido}">
                                 <h5 class="fw-semibold mb-0 d-flex">
-                                    Pedido #<span class="ms-1"></span>
+                                    Pedido #<span class="ms-1" th:text="${req.id}"></span>
                                 </h5>
 
                                 <div class="table-responsive-sm pt-3 d-flex boxx">
                                     <table class="table table-borderless table-sm" cellpadding="2" cellspacing="0" th:each="items : ${items}">
                                         <tbody>
                                             <tr>
-                                                <td class="col-20 px-0" th:text="${items.amount}">1x</td>
-                                                <td class="col-13" th:text="${items.product.name}">Fruta 1</td>
-                                                <td class="col-14 text-end" th:text="${items.subTotal}">R$ 0,00</td>
+                                                <td class="col-20 px-0" th:text="${items.amount}">
+                                                </td>
+                                                <td class="col-13" th:text="${items.product.name}"></td>
+                                                <td class="col-14 text-end">
+                                                	R$
+                                                	<span  th:text="${items.value}"></span>
+                                                </td>
                                             </tr>
 
                                         </tbody>
                                     </table>
                                 </div>
 
-                                <div class="d-flex align-items-end gy-2" th:each="ped : ${pedido}">
+                                <div class="d-flex align-items-end gy-2">
                                     <div class="pt-2 col">
                                         <div class="d-flex">
                                             <small class="h-small fw-semibold me-auto">
@@ -58,7 +62,7 @@
                                             </small>
                                             <small class="h-small fw-semibold pe-1">
                                                 R$
-                                                <span class="ms-1" th:text="${ped.subTotal}"></span>
+                                                <span class="ms-1" th:text="${req.subTotal}"></span>
                                             </small>
                                         </div>
         
@@ -67,7 +71,7 @@
                                                 Taxa de entrega
                                             </small>
                                             <small class="fw-semibold pe-1">
-                                                R$ 10,00
+                                                R$ 10.0
                                             </small>
                                         </div>
     
@@ -77,7 +81,7 @@
                                             </small>
                                             <small class="fw-semibold pe-1 d-flex">
                                             	R$
-                                                <span class="ms-1" th:text="${ped.total}"></span>
+                                                <span class="ms-1" th:text="${req.total}"></span>
                                             </small>
                                         </div>
                                     </div>
@@ -108,13 +112,13 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-end" th:each="ped : ${pedido}">
+                                <div class="d-flex align-items-end">
                                     <div class="pt-3 pb-4">
                                         <small class="h-small fw-semibold me-auto">
                                             Status do pedido
                                         </small>
                                         <div>
-                                        	<span th:text="${ped.status}"></span>
+                                        	<span th:text="${req.status}"></span>
                                         </div>
                                     </div>
                                 </div>
