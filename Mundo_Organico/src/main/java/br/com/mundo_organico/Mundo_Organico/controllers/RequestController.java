@@ -172,6 +172,11 @@ public class RequestController {
         request.setSubTotal(total);
         // total do pedido com a entrega
         request.setTotal(total + 10);
+
+        //Data e hora do pedido
+        request.setData();
+        request.setHora();
+
         request.setStatus("CONCLUÍDO");
 
         requestService.save(request);

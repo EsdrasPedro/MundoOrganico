@@ -1,9 +1,9 @@
 package br.com.mundo_organico.Mundo_Organico.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +21,20 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-//	private Date time;
-//	private Date date;
+
+	Date dataHoraAtual = new Date();
+
+	String data = new SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual);
+
+	String hora = new SimpleDateFormat("HH:mm:ss").format(dataHoraAtual);
+
+	public void setData() {
+		this.data = data;
+	}
+
+	public void setHora() {
+		this.hora = hora;
+	}
 
 	private String status;
 
@@ -48,6 +60,7 @@ public class Request {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getStatus() {
 		return status;
@@ -88,5 +101,6 @@ public class Request {
 	public void setItems(Set<Ordered_Items> items) {
 		this.items = items;
 	}
+
 
 }
