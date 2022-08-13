@@ -58,9 +58,9 @@
                                             </div>
 
                                             <a th:href="@{/pedido(pedido?id=${req.id})}" class="mt-2 d-flex" style="height: 9vh; text-decoration: none;">
-                                                <div class="me-auto">
-                                                    <p class="text-muted mb-2">Fruta 1 </p>
-                                                    <p class="text-muted mb-2">Fruta 2 </p>
+                                                <div class="me-auto lh-sm">
+                                                    <p> <span class="text-muted mb-2" th:text="${req.data}"></span> </p>
+                                                    <p> <span class="text-muted mb-2" th:text="${req.hora}"></span> </p>
                                                 </div>
 
                                                 <div class="d-flex align-items-center" style="width: 2vh;">
