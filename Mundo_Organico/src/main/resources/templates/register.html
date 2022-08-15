@@ -22,6 +22,9 @@
                 <h2 class="col-13 text-center fw-semibold">Basta se cadastrar <br> para comprar!</h2>
                 <form method="post" th:action="@{/salvarUser}">
                     <div>
+                    <div th:if="${!#strings.isEmpty(msgError)}" class="mensss pt-3">
+                        [[${msgError}]]
+                    </div>
                         <div class="col-13 pt-5">
                             <label class="form-label hh">Nome Completo</label>
                             <input class="Text" type="text" name="name" required>

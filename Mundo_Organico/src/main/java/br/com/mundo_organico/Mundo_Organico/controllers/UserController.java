@@ -172,35 +172,24 @@ public class UserController {
 	}
 
 	@PostMapping("/salvarUser")
-	public String createUser(User user, String passwordValid, RedirectAttributes red) {
+	public String createUser(User user, String passwordValid, RedirectAttributes ra, Model model) {
 
-		if (user.getName().trim().isEmpty() || user.getCellphone().trim().isEmpty() || user.getEmail().trim().isEmpty()
-				|| user.getPassword().trim().isEmpty()) {
-			// red.addFlashAttribute(); mensagem
-			return "redirect:/cadastro";
+		try {
+			userService.validSaveUser(user, passwordValid);
+
+			user.setPassword(userService.criptografarPassword(user));
+			userService.save(user);
+			userService.emailSend(user);
+
+			return "redirect:/";
+
+		}
+		catch (UserInvalid e) {
+			ra.addFlashAttribute("msgError", e.getMessage());
 		}
 
-		if (this.userDAO.existsByEmail(user.getEmail()) && !user.getPassword().equals(passwordValid)) {
-			// red.addFlashAttribute(); mensagem
-			// red.addFlashAttribute("", user); Retornar o resto
-			return "redirect:/cadastro";
+		return "redirect:/cadastro";
 
-		} else if (this.userDAO.existsByEmail(user.getEmail())) {
-			// red.addFlashAttribute(); mensagem
-			// red.addFlashAttribute("", user); Retornar o resto
-			return "redirect:/cadastro";
-
-		} else if (!user.getPassword().equals(passwordValid)) {
-			// red.addFlashAttribute(); mensagem
-			// red.addFlashAttribute("", user); Retornar o resto
-			return "redirect:/cadastro";
-		}
-
-		user.setPassword(userService.criptografarPassword(user));
-		userService.save(user);
-		userService.emailSend(user);
-
-		return "redirect:/";
 	}
 
 	@PostMapping("/logar")

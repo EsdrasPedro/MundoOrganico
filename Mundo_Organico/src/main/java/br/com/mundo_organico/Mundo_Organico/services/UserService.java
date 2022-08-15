@@ -59,6 +59,26 @@ public class UserService {
 		}
 
 	}
+	
+    public void validSaveUser(User user, String passwordValid) throws UserInvalid {
+
+        if (user.getName().trim().isEmpty() || user.getCellphone().trim().isEmpty() || user.getEmail().trim().isEmpty()
+                || user.getPassword().trim().isEmpty()) {
+            // red.addFlashAttribute(); mensagem
+            throw new UserInvalid("Os campos obrigatórios não podem estar vazio.");
+        }
+
+        if (this.userDAO.existsByEmail(user.getEmail()) && !user.getPassword().equals(passwordValid)) {
+          throw new UserInvalid("Email já cadastrado.");
+
+        } else if (this.userDAO.existsByEmail(user.getEmail())) {
+            throw new UserInvalid("Email já cadastrado.");
+
+        } else if (!user.getPassword().equals(passwordValid)) {
+            throw new UserInvalid("As senhas não coincidem.");
+        }
+
+    }
 
 	// verificar o email e senha do usuário para login
 	public User login(String email, String password) throws UserNonexistentException, UserInvalid {
